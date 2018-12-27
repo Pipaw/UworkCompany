@@ -64,6 +64,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="12dp"
         android:background="@color/loginButtom"
+        android:onClick="login"
         android:text="@string/login"
         app:layout_constraintBottom_toTopOf="@+id/signUpText"
         app:layout_constraintEnd_toEndOf="parent"
