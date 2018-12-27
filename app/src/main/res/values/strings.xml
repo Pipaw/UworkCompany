@@ -10,6 +10,7 @@
     <string name="hire">Hire a Worker</string>
     <string name="usernname">Username</string>
     <string name="confirm">Confirm Password</string>
+    <string name="findWorker">Find a Worker</string>
 
 
     <string name="prompt_password_again">Confirm Password</string>
