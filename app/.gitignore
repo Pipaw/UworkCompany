@@ -1,2 +1,4 @@
 /build
 /google-services.json
+/src/debug/res/values/google_maps_api.xml
+/src/main/java/com/example/paolo/uworkcompany/RequestActivity.java
