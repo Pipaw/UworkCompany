@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     //Adding member variables
@@ -51,12 +52,20 @@ public class LoginActivity extends AppCompatActivity {
         //Authentication Initialization
         mAuth = FirebaseAuth.getInstance();
     }
+
+    public void onStart(){
+        super.onStart();
+        //Checking if a user is currently logged in
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            HomeActivity();
+        }
+    }
     //Click and other Events
 
     public void login(View view){
         attemptLogin();
     }
-
 
 
     //Own functionality
