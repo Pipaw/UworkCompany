@@ -1,5 +1,7 @@
 package com.example.paolo.uworkcompany;
 
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -13,6 +15,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class RequestActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
+    LocationManager mLocationManager;
+    LocationListener mLocationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

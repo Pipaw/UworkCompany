@@ -37,8 +37,8 @@ public class HomeActivity extends AppCompatActivity {
 
     public void findWorker(View view) {
         // TODO: make a function to call new intent
-
-
+        startActivity(new Intent(this, RequestActivity.class));
+        finish();
     }
 
     public void logout(View view){

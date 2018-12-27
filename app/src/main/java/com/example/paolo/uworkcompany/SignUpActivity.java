@@ -115,8 +115,10 @@ public class SignUpActivity extends AppCompatActivity {
                     loginActivityIntent();
                 }else{
                     //Error messages If the creation of user failed
+                    /*
                     FirebaseAuthException e = (FirebaseAuthException)task.getException();
                     Toast.makeText(SignUpActivity.this, "Failed Registration: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    */
                     Log.d("uWork", "User Creation Failed");
                     Log.d("uWork", mPasword.getText().toString());
                     showDialogError("Registration attempt failed!");
