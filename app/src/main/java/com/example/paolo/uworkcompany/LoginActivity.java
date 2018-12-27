@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     private void showDialogError(String message){
         new AlertDialog.Builder(this).setTitle("Error").setMessage(message).setPositiveButton
                 (android.R.string.ok, null).setIcon(android.R.drawable.ic_dialog_alert).show();
