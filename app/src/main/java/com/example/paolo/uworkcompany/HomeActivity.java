@@ -1,6 +1,7 @@
 package com.example.paolo.uworkcompany;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,11 +22,17 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         currentUser = findViewById(R.id.currentUser);
-        mAuth = FirebaseAuth.getInstance();
+
+        getDisplayName();
+
+/*
+        currentUser = findViewById(R.id.currentUser);
+
 
         mUser = mAuth.getCurrentUser();
         currentUser.setText(mUser.toString());
-
+*/
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public void findWorker(View view) {
@@ -40,5 +47,13 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         finish();
         startActivity(intent);
+    }
+
+    private void getDisplayName(){
+        SharedPreferences preferences = getSharedPreferences(SignUpActivity.CHAT_PREF, MODE_PRIVATE);
+        String user = preferences.getString(SignUpActivity.DISPLAY_NAME_KEY, null);
+        currentUser.setText(user);
+        if(currentUser  == null) currentUser.setText("Anonymous");
+
     }
 }

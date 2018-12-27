@@ -25,7 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mPasword,mConfirmPass;
 
     private FirebaseAuth mAuth;
-    final String CHAT_PREF = "ChatPrefs", DISPLAY_NAME_KEY = "username";
+    public static final String CHAT_PREF = "ChatPrefs", DISPLAY_NAME_KEY = "username";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
