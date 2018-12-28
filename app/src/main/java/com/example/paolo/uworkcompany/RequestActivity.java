@@ -86,7 +86,7 @@ public class RequestActivity extends FragmentActivity implements OnMapReadyCallb
         */
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mLocationListener);
+            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30, 30, mLocationListener);
             Location lastKnownLocation = mLocationManager.getLastKnownLocation
                     (LocationManager.GPS_PROVIDER);
             if(lastKnownLocation != null){
@@ -107,10 +107,9 @@ public class RequestActivity extends FragmentActivity implements OnMapReadyCallb
         if (requestCode == 1 && grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
             if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
                     PackageManager.PERMISSION_GRANTED){
-                mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
-                        0, mLocationListener);
-                Location lastKnownLocation = mLocationManager.getLastKnownLocation
-                        (LocationManager.GPS_PROVIDER);
+                mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30,
+                        30, mLocationListener);
+                Location lastKnownLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 if(lastKnownLocation != null) {
                     updateMapLocation(lastKnownLocation);
                 }
@@ -122,7 +121,7 @@ public class RequestActivity extends FragmentActivity implements OnMapReadyCallb
     private void updateMapLocation(Location location){
         LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.clear();
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 16));
         mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
     }
 
