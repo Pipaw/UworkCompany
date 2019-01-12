@@ -23,10 +23,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RequestActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -45,6 +49,7 @@ public class RequestActivity extends FragmentActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
         //Request for worker once the activity launch
         setMapLocation();
+        userRequestLocation();
 
     }
 
@@ -89,13 +94,6 @@ public class RequestActivity extends FragmentActivity implements OnMapReadyCallb
 
             }
         };
-
-        /*
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        */
 
         //Checking if the gps and location is Enabled
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
@@ -151,6 +149,30 @@ public class RequestActivity extends FragmentActivity implements OnMapReadyCallb
         mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
     }
 
+    //Trying the getting information in the database
+    private void userRequestLocation(){
+        final String path = "WorkerRequest";
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                .getReference(path);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserInformation user = dataSnapshot.getValue(UserInformation.class);
+                LatLng location = new LatLng(user.latitude, user.longitude);
+                mMap.clear();
+                mMap.addMarker(new MarkerOptions().position(location).title("Hello")).setIcon
+                        (BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory
+                                .HUE_YELLOW));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     //Initiate the request to track the device's location
     //For the requesting of the workers
@@ -189,9 +211,6 @@ public class RequestActivity extends FragmentActivity implements OnMapReadyCallb
             }, null);
         }
     }
-    /*
-    public void request(View view){
-        setMapLocation();
-    }
-    */
+
 }
+
